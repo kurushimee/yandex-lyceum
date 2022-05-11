@@ -1,2 +1,2 @@
 # yandex-lyceum
-My private Yandex Lyceum repository.
+My personal Yandex Lyceum repository.
