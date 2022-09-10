@@ -17,10 +17,24 @@ class Bell:
         self.kwargs = kwargs
 
     def print_info(self):
-        kwargs = list()
-        for k,v in self.kwargs:
-            kwargs.append(f"{k}: {v}")
+        if self.args == () and self.kwargs == {}:
+            print("-")
+            return
 
+        if self.kwargs != {}:
+            kwargs = list()
+            for k, v in self.kwargs.items():
+                kwargs.append(f"{k}: {v}")
+            kwargs.sort()
+            print(", ".join(kwargs), end="")
+
+            if self.args != ():
+                print("; ", end="")
+            else:
+                print()
+
+        if self.args != ():
+            print(", ".join(self.args))
 
 
 class LittleBell(Bell):
@@ -30,7 +44,9 @@ class LittleBell(Bell):
 
 
 class BigBell(Bell):
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
+        self.args = args
+        self.kwargs = kwargs
         self.dong = False
 
     def sound(self):
