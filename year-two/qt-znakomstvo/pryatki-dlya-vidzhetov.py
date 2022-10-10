@@ -1,6 +1,12 @@
 import sys
 
-from PyQt5.QtWidgets import QApplication, QCheckBox, QLineEdit, QMainWindow
+from PyQt5.QtWidgets import (
+    QApplication,
+    QCheckBox,
+    QLineEdit,
+    QMainWindow,
+    QPushButton,
+)
 
 
 class W_MainWindow(QMainWindow):
