@@ -79,24 +79,28 @@ class TicketSystem:
                 if str(hall.film) == str(film) and (
                     nearest == tuple()
                     or hall.film.time_in_minutes()
-                    > nearest[1].film.time_in_minutes()
+                    < nearest[1].film.time_in_minutes()
                 ):
                     in_a_row = 0
                     available_seats = []
-                    for row in hall.seats:
-                        for seat in row:
-                            if seat == 0:
+                    for row in range(len(hall.seats)):
+                        if in_a_row == required_spots:
+                            nearest = (cinema, hall, available_seats)
+                            break
+                        for col in range(len(hall.seats[row])):
+                            if in_a_row == required_spots:
+                                nearest = (cinema, hall, available_seats)
+                                break
+                            if hall.seats[row][col] == 0:
                                 in_a_row += 1
-                                available_seats.append((row, seat))
+                                available_seats.append((row, col))
                             else:
                                 in_a_row = 0
                                 available_seats.clear()
-                            if in_a_row == required_spots:
-                                nearest = (cinema, hall, available_seats)
         if nearest != tuple():
             print(
-                f"""Нашлась сессия на фильм
-                "{film}" в "{nearest[0]}," {nearest[1].id} зал."""
+                f'Нашлась сессия на фильм\
+ "{film}" в "{nearest[0]}," {nearest[1].id}-й зал.'
             )
             return (nearest[1], nearest[2])
         print("Нет сессии на данный фильм.")
@@ -126,13 +130,18 @@ cin1.append_hall(hall1)
 # Изменение следующего фильма в зале hall1 на фильм film1
 hall1.change_film(film1)
 
-# Вывод конфигурации кресел в зале hall1
+print("Конфигурация кресел hall1:")
 print(hall1)
-# Вывод длительности фильма
-print(film1.duration)
+
+print(f"Длительность фильма: {film1.duration}")
+print()
 
 # Поиск ближайшей сессии фильма film1 с тремя местами рядом
 # в системе билетов tsys1
 session = tsys1.get_session(film1, 3)
 # Покупка билета на ближайшую сессию фильма film1 в билетной системе tsys1
 tsys1.buy_ticket(*session)
+print()
+
+print("Конфигурация кресел hall1 после покупки билета:")
+print(hall1)
