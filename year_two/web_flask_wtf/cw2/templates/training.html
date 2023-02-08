@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% set engineering = ["инженер", "строитель"] %}
+    {% if profession in engineering %}
+        <h3 align="center">Инженерные тренажеры</h3>
+        <div class="text-center">
+            <img src="/static/img/engineering.jpg">
+        </div>
+    {% else %}
+        <h3 align="center">Научные симуляторы</h3>
+        <div class="text-center">
+            <img src="/static/img/science.png">
+        </div>
+    {% endif %}
+{% endblock %}
