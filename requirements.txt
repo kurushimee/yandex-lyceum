@@ -2,3 +2,5 @@ pygame
 requests
 flask
 pillow
+PyQt5
+pytest
